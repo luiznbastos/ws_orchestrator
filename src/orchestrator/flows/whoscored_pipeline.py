@@ -25,6 +25,9 @@ async def whoscored_pipeline_flow(
     driver_type: str,
     max_keys_per_unit: int,
     max_workers: int,
+    force_refresh_seasons: bool = False,
+    force_refresh_matches: bool = False,
+    force_refresh_events: bool = False,
 ):
     """
     Main pipeline flow that orchestrates the WhoScored data processing.
@@ -45,6 +48,9 @@ async def whoscored_pipeline_flow(
             tournament_name=tournament_name,
             scrapping_type=scrapping_type,
             driver_type=driver_type,
+            force_refresh_seasons=force_refresh_seasons,
+            force_refresh_matches=force_refresh_matches,
+            force_refresh_events=force_refresh_events,
         )
         scrape_job_id = await scrape_future.result()
         logger.info(f"Scraping job completed with job_id: {scrape_job_id}")

@@ -28,6 +28,9 @@ def start_pipeline():
             driver_type=settings.driver_type,
             max_keys_per_unit=settings.max_keys_per_unit,
             max_workers=settings.max_workers,
+            force_refresh_seasons=settings.force_refresh_seasons,
+            force_refresh_matches=settings.force_refresh_matches,
+            force_refresh_events=settings.force_refresh_events,
         ))
     else:
         raise ValueError(f"Invalid flow type: {settings.flow_type}")

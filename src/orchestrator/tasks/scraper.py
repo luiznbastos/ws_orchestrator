@@ -17,6 +17,9 @@ async def submit_scraping_job(
     tournament_name: str,
     scrapping_type: str,
     driver_type: str,
+    force_refresh_seasons: bool = False,
+    force_refresh_matches: bool = False,
+    force_refresh_events: bool = False,
 ):
     """
     Task to submit scraping job to AWS Batch.
@@ -40,6 +43,9 @@ async def submit_scraping_job(
         {"name": "SCRAPPING_TYPE", "value": scrapping_type},
         {"name": "DRIVER_TYPE", "value": driver_type},
         {"name": "SCRAPPING_DOMAIN", "value": "WHO_SCORED"},
+        {"name": "FORCE_REFRESH_SEASONS", "value": str(force_refresh_seasons).lower()},
+        {"name": "FORCE_REFRESH_MATCHES", "value": str(force_refresh_matches).lower()},
+        {"name": "FORCE_REFRESH_EVENTS", "value": str(force_refresh_events).lower()},
     ]
     env = [item for item in env if item["value"] is not None]
 

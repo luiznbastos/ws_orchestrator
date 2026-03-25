@@ -45,6 +45,9 @@ class OrchestratorSettings(BaseSettings):
         default=None,
         description="End date for data processing"
     )
+    force_refresh_seasons: bool = Field(default=False, description="Force re-scrape seasons step")
+    force_refresh_matches: bool = Field(default=False, description="Force re-scrape matches step")
+    force_refresh_events: bool = Field(default=False, description="Force re-scrape events step")
 
     def _get_ssm_parameter(self, name: str) -> Optional[str]:
         """Fetch parameter from AWS Systems Manager Parameter Store"""
