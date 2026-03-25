@@ -12,14 +12,16 @@ def start_pipeline():
         settings.run_id = get_run_id_and_state()
     logger.info(f"Using run_id {settings.run_id} to run the pipeline ...")
     
-    if not settings.start_date or not settings.end_date:
-        raise ValueError("START_DATE and END_DATE must be set in .env file")
+    is_full_run = settings.scrapping_type == "FULL_RUN"
+
+    if not is_full_run and (not settings.start_date or not settings.end_date):
+        raise ValueError("START_DATE and END_DATE must be set unless SCRAPPING_TYPE is FULL_RUN")
     
-    if settings.flow_type == FlowType.DAILY or settings.flow_type == FlowType.CUSTOM:
+    if settings.flow_type in (FlowType.DAILY, FlowType.CUSTOM):
         asyncio.run(whoscored_pipeline_flow(
             run_id=settings.run_id,
-            start_date=settings.start_date,
-            end_date=settings.end_date,
+            start_date=settings.start_date or "",
+            end_date=settings.end_date or "",
             tournament_url=settings.tournament_url,
             tournament_name=settings.tournament_name,
             scrapping_type=settings.scrapping_type,
