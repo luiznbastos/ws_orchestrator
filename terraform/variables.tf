@@ -13,7 +13,7 @@ variable "project_name" {
 variable "job_name" {
   description = "Job name"
   type        = string
-  default     = "orchestration"
+  default     = "orchestrator"
 }
 
 variable "vcpus" {

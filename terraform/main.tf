@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket         = "terraform-ws-analytics-infra"
-    key            = "state/ws_orchestration/terraform.tfstate"
+    key            = "state/ws_orchestrator/terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true
     dynamodb_table = "terraform-state-locks"

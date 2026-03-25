@@ -190,7 +190,7 @@ terraform apply
 ```
 
 This creates:
-- **Job Definition**: `ws-analytics-orchestration` 
+- **Job Definition**: `ws-analytics-orchestrator` 
 - **IAM Role**: With Batch submit/describe and S3 access permissions
 - **SSM Parameters**: For referencing other job definitions
 
@@ -201,7 +201,7 @@ This creates:
 aws batch submit-job \
   --job-name "orchestration-$(date +%Y%m%d-%H%M%S)" \
   --job-queue "ws-analytics-job-queue" \
-  --job-definition "ws-analytics-orchestration" \
+  --job-definition "ws-analytics-orchestrator" \
   --parameters '{"RUN_ID":"manual-test-123","TOURNAMENT_NAME":"laliga"}'
 ```
 
@@ -216,7 +216,7 @@ aws events put-rule \
 # Add the Batch job as a target
 aws events put-targets \
   --rule "ws-orchestration-daily" \
-  --targets "Id"="1","Arn"="arn:aws:batch:us-east-1:ACCOUNT:job-queue/ws-analytics-job-queue","RoleArn"="arn:aws:iam::ACCOUNT:role/EventBridge-Batch-Role","BatchParameters"="{\"JobDefinition\":\"ws-analytics-orchestration\",\"JobName\":\"daily-orchestration\"}"
+  --targets "Id"="1","Arn"="arn:aws:batch:us-east-1:ACCOUNT:job-queue/ws-analytics-job-queue","RoleArn"="arn:aws:iam::ACCOUNT:role/EventBridge-Batch-Role","BatchParameters"="{\"JobDefinition\":\"ws-analytics-orchestrator\",\"JobName\":\"daily-orchestration\"}"
 ```
 
 #### Monitoring Deployed Jobs
