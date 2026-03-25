@@ -23,7 +23,7 @@ class OrchestratorSettings(BaseSettings):
     run_id: str = Field(default='', description="Unique identifier for the orchestration run")
     flow_type: FlowType = Field(default=FlowType.DAILY, description="Type of flow to execute")
     tournament_name: str = Field(default="laliga", description="Name of the tournament")
-    tournament_url: str = Field(default="https://1xbet.whoscored.com/regions/206/tournaments/4",description="URL of the tournament to scrape")
+    tournament_url: str = Field(default="https://www.whoscored.com/regions/206/tournaments/4", description="URL of the tournament to scrape")
     scrapping_type: str = Field(default="DATE_RANGE", description="Type of scraping strategy")
     driver_type: str = Field(default="CHROMIUM", description="Web driver type to use")
     max_keys_per_unit: int = Field(default=10, description="Maximum keys per processing unit")
